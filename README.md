@@ -1,6 +1,10 @@
 # GAE Cron for Cloud PubSub
+Original: https://github.com/GoogleCloudPlatform/reliable-task-scheduling-compute-engine-sample
+
 The Google App Engine Application which publishes 4 publications to 4 topics,
 every mintes, every hours, every days and every weeks.
+
+Using this service for scheduling and Google Cloud Pub/Sub for distributed messaging, you can build an application to reliably schedule tasks which can trigger Google Cloud Functions.
 
 ## Topics
 
