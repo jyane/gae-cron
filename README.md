@@ -19,6 +19,8 @@ projects/:project_id/topics/weekly-tick
 
 ``` sh
 # use pyenv, virtualenv if you want
+# pyenv virtualenv 2.7.11 gae-cron-2.7.11
+# pyenv local gae-cron-2.7.11
 pip install -t lib -r requirements.txt
 gcloud app deploy app.yaml \cron.yaml
 
