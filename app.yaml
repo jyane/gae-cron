@@ -1,21 +1,6 @@
-runtime: python27
-api_version: 1
-threadsafe: true
+runtime: go
+api_version: go1
 
 handlers:
 - url: /.*
-  script: main.app
-
-libraries:
-- name: webapp2
-  version: latest
-- name: pycrypto
-  version: latest
-- name: ssl
-  version: latest
-
-automatic_scaling:
-  min_idle_instances: 1
-  max_idle_instances: 1
-  min_pending_latency: 3000ms
-  max_pending_latency: 3000ms
+  script: _go_app
