@@ -11,40 +11,37 @@ import (
 	"google.golang.org/appengine"
 )
 
-func publish(client *pubsub.Client, topic, msg string) error {
-	ctx := context.Background()
+func publish(ctx context.Context, client *pubsub.Client, topic, msg string) (id string, err error) {
 	t := client.Topic(topic)
 	result := t.Publish(ctx, &pubsub.Message{
 		Data: []byte(msg),
 	})
+	return result.Get(ctx)
+}
 
-	id, err := result.Get(ctx)
-	if err != nil {
-		return err
+func rootHandler(w http.ResponseWriter, r *http.Request) {
+	fmt.Fprintln(w, "ok")
+}
+
+func publishHandler(w http.ResponseWriter, r *http.Request) {
+	if topic, found := strToTopic[r.URL.Query().Get("topic")]; found {
+		ctx := appengine.NewContext(r)
+		client, err := pubsub.NewClient(ctx, os.Getenv("PROJECT_ID"))
+		if err != nil {
+			log.Fatalf("Could not create pubsub client: %v", err)
+		}
+		id, err := publish(ctx, client, string(topic), "a")
+		if err != nil {
+			log.Fatalf("Could not publish: %v", err)
+		}
+		fmt.Fprintf(w, "hello %v", id)
+	} else {
+		fmt.Fprintf(w, "bad topic")
 	}
-
-	log.Printf("Published a message; msg ID: %v", id)
-	return nil
 }
 
 func main() {
-	ctx := context.Background()
-	proj := os.Getenv("PROJECT_ID")
-
-	_, err := pubsub.NewClient(ctx, proj)
-	if err != nil {
-		log.Fatalf("Could not create pubsub client: %v", err)
-	}
-
-	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
-		fmt.Fprintln(w, "hello")
-	})
-
-	http.HandleFunc("/publish", func(w http.ResponseWriter, r *http.Request) {
-		path := r.URL.Path
-		publish(client, "minutely-tick", "")
-		fmt.Fprintln(w, path)
-	})
-
+	http.HandleFunc("/", rootHandler)
+	http.HandleFunc("/publish", publishHandler)
 	appengine.Main()
 }
