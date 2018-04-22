@@ -1,5 +1,5 @@
 language: go
 
 script:
-  - make travis
+  - make ci
   - git diff --exit-code

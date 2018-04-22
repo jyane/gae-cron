@@ -5,8 +5,8 @@ handlers:
 - url: /.*
   script: _go_app
 
-env_variables:
-  PROJECT_ID: "jyane-dev"
+includes:
+  - env.yaml
 
 automatic_scaling:
   min_idle_instances: 1
