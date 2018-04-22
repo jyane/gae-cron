@@ -22,7 +22,7 @@ func publish(ctx context.Context, topic Topic) (string, error) {
 		log.Errorf(ctx, "Failed to create the pubsub client %v", err)
 		return "", err
 	}
-	result := client.Topic(string(topic)).Publish(ctx, &pubsub.Message{
+	result := client.TopicInProject(string(topic), projectId).Publish(ctx, &pubsub.Message{
 		Data: []byte(""),
 	})
 	id, err := result.Get(ctx)
