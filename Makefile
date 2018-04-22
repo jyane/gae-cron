@@ -1,7 +1,8 @@
 all: \
 	clean \
-	init \
 	build \
+	fmt \
+	init \
 	test
 
 build:
@@ -9,6 +10,9 @@ build:
 
 clean:
 	go clean .
+
+fmt:
+	go fmt .
 
 init:
 	go get -u google.golang.org/appengine/...
