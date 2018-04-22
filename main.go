@@ -23,7 +23,7 @@ func publish(ctx context.Context, topic Topic) (string, error) {
 		return "", err
 	}
 	result := client.TopicInProject(string(topic), projectId).Publish(ctx, &pubsub.Message{
-		Data: []byte(""),
+		Data: []byte("tick"),
 	})
 	id, err := result.Get(ctx)
 	if err != nil {
