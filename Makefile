@@ -4,7 +4,7 @@ build:
 clean:
 	go clean .
 
-ci:
+ci: \
 	fmt \
 	clean \
 	init \
