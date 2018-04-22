@@ -1,15 +1,18 @@
-all: \
-	clean \
-	build \
-	fmt \
-	init \
-	test
-
 build:
 	go build .
 
 clean:
 	go clean .
+
+ci:
+	fmt \
+	clean \
+	init \
+	build \
+	test
+
+deploy:
+	gcloud app deploy app.yaml \cron.yaml
 
 fmt:
 	go fmt .
@@ -27,5 +30,9 @@ test:
 .PHONY: \
 	build \
 	clean \
+	ci \
+	deploy \
+	fmt \
+	init \
 	run \
-	init
+	test \

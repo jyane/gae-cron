@@ -6,7 +6,7 @@ import (
 	"net/http"
 	"os"
 
-"cloud.google.com/go/pubsub"
+	"cloud.google.com/go/pubsub"
 	"google.golang.org/appengine"
 	"google.golang.org/appengine/log"
 )
