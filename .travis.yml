@@ -2,6 +2,4 @@ language: go
 
 script:
   - make
-  - if git status --porcelain | read; then \
-		die "Uncommitted or untracked files found; commit changes first" \
-	fi
+  - git diff --exit-code
