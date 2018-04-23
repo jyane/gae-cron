@@ -1,3 +1,2 @@
-.python-version
-lib
-*.pyc
+gae-cron
+env.yaml
