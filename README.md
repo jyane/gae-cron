@@ -1,4 +1,6 @@
-# GAE Cron for Cloud PubSub
+# ~GAE Cron for Cloud PubSub~ Obsolete
+GCP now provides a cron service.
+
 Original: https://github.com/GoogleCloudPlatform/reliable-task-scheduling-compute-engine-sample
 
 The Google App Engine Application which publishes 4 publications to 4 topics,
